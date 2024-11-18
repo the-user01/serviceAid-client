@@ -1,0 +1,218 @@
+[
+    {
+        "serviceName": "Home Painting",
+        "providerName": "HomeFix Services",
+        "providerEmail": "homefix@example.com",
+        "description": "Professional home painting service for both interiors and exteriors.",
+        "category": "Home Services",
+        "price": 100,
+        "unit": "hour",
+        "availability": {
+            "days": [
+                "Monday",
+                "Wednesday",
+                "Friday"
+            ],
+            "hours": "8:00 AM - 6:00 PM"
+        },
+        "image": "https://example.com/images/home_painting.jpg"
+    },
+    {
+        "serviceName": "Plumbing Repair",
+        "providerName": "PlumbRight",
+        "providerEmail": "plumbright@example.com",
+        "description": "Expert plumbing services including pipe repairs, installations, and maintenance.",
+        "category": "Home Services",
+        "price": 75,
+        "unit": "hour",
+        "availability": {
+            "days": [
+                "Tuesday",
+                "Thursday",
+                "Saturday"
+            ],
+            "hours": "9:00 AM - 5:00 PM"
+        },
+        "image": "https://example.com/images/plumbing_repair.jpg"
+    },
+    {
+        "serviceName": "Haircut & Styling",
+        "providerName": "BeautyCare Salon",
+        "providerEmail": "beautycare@example.com",
+        "description": "Stylish haircuts and professional hair styling services.",
+        "category": "Beauty & Salon",
+        "price": 30,
+        "unit": "session",
+        "availability": {
+            "days": [
+                "Monday",
+                "Wednesday",
+                "Friday"
+            ],
+            "hours": "9:00 AM - 7:00 PM"
+        },
+        "image": "https://example.com/images/haircut_styling.jpg"
+    },
+    {
+        "serviceName": "Facial Treatment",
+        "providerName": "GlowUp Studio",
+        "providerEmail": "glowup@example.com",
+        "description": "Relaxing facial treatments using premium skincare products.",
+        "category": "Beauty & Salon",
+        "price": 50,
+        "unit": "session",
+        "availability": {
+            "days": [
+                "Tuesday",
+                "Thursday",
+                "Saturday"
+            ],
+            "hours": "10:00 AM - 5:00 PM"
+        },
+        "image": "https://example.com/images/facial_treatment.jpg"
+    },
+    {
+        "serviceName": "Washing Machine Repair",
+        "providerName": "Repair Masters",
+        "providerEmail": "repairmasters@example.com",
+        "description": "Repair and maintenance services for all types of washing machines.",
+        "category": "Appliance and Repair",
+        "price": 45,
+        "unit": "hour",
+        "availability": {
+            "days": [
+                "Monday",
+                "Thursday",
+                "Saturday"
+            ],
+            "hours": "9:00 AM - 5:00 PM"
+        },
+        "image": "https://example.com/images/washing_machine_repair.jpg"
+    },
+    {
+        "serviceName": "Refrigerator Repair",
+        "providerName": "FridgeFixers",
+        "providerEmail": "fridgefixers@example.com",
+        "description": "Refrigerator repair, maintenance, and installation services.",
+        "category": "Appliance and Repair",
+        "price": 50,
+        "unit": "hour",
+        "availability": {
+            "days": [
+                "Tuesday",
+                "Friday",
+                "Sunday"
+            ],
+            "hours": "9:00 AM - 6:00 PM"
+        },
+        "image": "https://example.com/images/refrigerator_repair.jpg"
+    },
+    {
+        "serviceName": "Carpet Cleaning",
+        "providerName": "CleanRite",
+        "providerEmail": "cleanrite@example.com",
+        "description": "Specialized carpet cleaning services with deep stain removal.",
+        "category": "Cleaning",
+        "price": 45,
+        "unit": "hour",
+        "availability": {
+            "days": [
+                "Monday",
+                "Wednesday",
+                "Friday"
+            ],
+            "hours": "9:00 AM - 5:00 PM"
+        },
+        "image": "https://example.com/images/carpet_cleaning.jpg"
+    },
+    {
+        "serviceName": "Window Cleaning",
+        "providerName": "ClearView Cleaners",
+        "providerEmail": "clearview@example.com",
+        "description": "Professional window cleaning for homes and businesses.",
+        "category": "Cleaning",
+        "price": 40,
+        "unit": "hour",
+        "availability": {
+            "days": [
+                "Tuesday",
+                "Thursday",
+                "Saturday"
+            ],
+            "hours": "10:00 AM - 4:00 PM"
+        },
+        "image": "https://example.com/images/window_cleaning.jpg"
+    },
+    {
+        "serviceName": "Tutoring Services",
+        "providerName": "LearnSmart",
+        "providerEmail": "learnsmart@example.com",
+        "description": "Personalized tutoring for students in various subjects.",
+        "category": "Education",
+        "price": 30,
+        "unit": "hour",
+        "availability": {
+            "days": [
+                "Monday",
+                "Wednesday",
+                "Friday"
+            ],
+            "hours": "9:00 AM - 5:00 PM"
+        },
+        "image": "https://example.com/images/tutoring_services.jpg"
+    },
+    {
+        "serviceName": "Online Course Creation",
+        "providerName": "EduMaster",
+        "providerEmail": "edumaster@example.com",
+        "description": "Assistance in creating and developing online courses.",
+        "category": "Education",
+        "price": 40,
+        "unit": "hour",
+        "availability": {
+            "days": [
+                "Tuesday",
+                "Thursday",
+                "Saturday"
+            ],
+            "hours": "10:00 AM - 4:00 PM"
+        },
+        "image": "https://example.com/images/online_course_creation.jpg"
+    },
+    {
+        "serviceName": "Yoga Classes",
+        "providerName": "ZenFit",
+        "providerEmail": "zenfit@example.com",
+        "description": "Group and individual yoga classes for relaxation and fitness.",
+        "category": "Health & Wellness",
+        "price": 25,
+        "unit": "session",
+        "availability": {
+            "days": [
+                "Monday",
+                "Wednesday",
+                "Friday"
+            ],
+            "hours": "8:00 AM - 5:00 PM"
+        },
+        "image": "https://example.com/images/yoga_classes.jpg"
+    },
+    {
+        "serviceName": "Massage Therapy",
+        "providerName": "RelaxPlus",
+        "providerEmail": "relaxplus@example.com",
+        "description": "Therapeutic massage sessions for stress relief and muscle relaxation.",
+        "category": "Health & Wellness",
+        "price": 50,
+        "unit": "session",
+        "availability": {
+            "days": [
+                "Tuesday",
+                "Thursday",
+                "Saturday"
+            ],
+            "hours": "9:00 AM - 7:00 PM"
+        },
+        "image": "https://example.com/images/massage_therapy.jpg"
+    }
+]
