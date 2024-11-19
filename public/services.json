@@ -15,7 +15,7 @@
             ],
             "hours": "8:00 AM - 6:00 PM"
         },
-        "image": "https://example.com/images/home_painting.jpg"
+        "image": "https://i.ibb.co.com/J5VgTrH/premium-photo-1681566677114-c201e8f3896f.jpg"
     },
     {
         "serviceName": "Plumbing Repair",
@@ -33,7 +33,7 @@
             ],
             "hours": "9:00 AM - 5:00 PM"
         },
-        "image": "https://example.com/images/plumbing_repair.jpg"
+        "image": "https://i.ibb.co.com/7GHH5XH/premium-photo-1682086494749-ddb7e16dc5fb.jpg"
     },
     {
         "serviceName": "Haircut & Styling",
@@ -51,7 +51,7 @@
             ],
             "hours": "9:00 AM - 7:00 PM"
         },
-        "image": "https://example.com/images/haircut_styling.jpg"
+        "image": "https://i.ibb.co.com/zGmSW9f/premium-photo-1661645828243-485dd5922189.jpg"
     },
     {
         "serviceName": "Facial Treatment",
@@ -69,7 +69,7 @@
             ],
             "hours": "10:00 AM - 5:00 PM"
         },
-        "image": "https://example.com/images/facial_treatment.jpg"
+        "image": "https://i.ibb.co.com/PQX370Z/premium-photo-1677178716119-707593a3e284.jpg"
     },
     {
         "serviceName": "Washing Machine Repair",
@@ -87,7 +87,7 @@
             ],
             "hours": "9:00 AM - 5:00 PM"
         },
-        "image": "https://example.com/images/washing_machine_repair.jpg"
+        "image": "https://i.ibb.co.com/CVKyHyn/premium-photo-1675937428916-535f85f41c61.jpg"
     },
     {
         "serviceName": "Refrigerator Repair",
@@ -105,7 +105,7 @@
             ],
             "hours": "9:00 AM - 6:00 PM"
         },
-        "image": "https://example.com/images/refrigerator_repair.jpg"
+        "image": "https://i.ibb.co.com/P1WNnLv/premium-photo-1661342490985-26da70d07a52.jpg"
     },
     {
         "serviceName": "Carpet Cleaning",
@@ -123,7 +123,7 @@
             ],
             "hours": "9:00 AM - 5:00 PM"
         },
-        "image": "https://example.com/images/carpet_cleaning.jpg"
+        "image": "https://i.ibb.co.com/Q9PY6Ph/photo-1527515637462-cff94eecc1ac.jpg"
     },
     {
         "serviceName": "Window Cleaning",
@@ -141,7 +141,7 @@
             ],
             "hours": "10:00 AM - 4:00 PM"
         },
-        "image": "https://example.com/images/window_cleaning.jpg"
+        "image": "https://i.ibb.co.com/pWFWyJd/photo-1595332997739-3a7f8eef2bf1.jpg"
     },
     {
         "serviceName": "Tutoring Services",
@@ -159,7 +159,7 @@
             ],
             "hours": "9:00 AM - 5:00 PM"
         },
-        "image": "https://example.com/images/tutoring_services.jpg"
+        "image": "https://i.ibb.co.com/fkRDNKb/photo-1454165804606-c3d57bc86b40.jpg"
     },
     {
         "serviceName": "Online Course Creation",
@@ -177,7 +177,7 @@
             ],
             "hours": "10:00 AM - 4:00 PM"
         },
-        "image": "https://example.com/images/online_course_creation.jpg"
+        "image": "https://i.ibb.co.com/BCMSbSH/photo-1512758017271-d7b84c2113f1.jpg"
     },
     {
         "serviceName": "Yoga Classes",
@@ -195,7 +195,7 @@
             ],
             "hours": "8:00 AM - 5:00 PM"
         },
-        "image": "https://example.com/images/yoga_classes.jpg"
+        "image": "https://i.ibb.co.com/j6KyQJf/photo-1529693662653-9d480530a697.jpg"
     },
     {
         "serviceName": "Massage Therapy",
@@ -213,6 +213,6 @@
             ],
             "hours": "9:00 AM - 7:00 PM"
         },
-        "image": "https://example.com/images/massage_therapy.jpg"
+        "image": "https://i.ibb.co.com/F00FTbC/photo-1542848284-8afa78a08ccb.jpg"
     }
 ]

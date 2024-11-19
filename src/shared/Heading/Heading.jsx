@@ -124,7 +124,7 @@ const Heading = () => {
                                 {navLinks}
                             </ul>
                         </div>
-                        <Link to="/" className="btn bg-white hover:bg-white">
+                        <Link to="/" className="btn bg-white hover:bg-white hover:border hover:border-blue-600">
 
                             <div className="flex items-center justify-center w-full h-full bg-white">
                                 <svg

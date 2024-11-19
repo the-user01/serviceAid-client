@@ -19,6 +19,8 @@ import CustomerBookings from "../pages/Dashboard/Customer/CustomerBookings/Custo
 import CustomerHistory from "../pages/Dashboard/Customer/CustomerHistory/CustomerHistory";
 import ServiceProviderHome from "../pages/Dashboard/ServiceProvider/ServiceProviderHome/ServiceProviderHome";
 import ServiceProviderServices from "../pages/Dashboard/ServiceProvider/ServiceProviderServices/ServiceProviderServices";
+import ServiceDetails from "../pages/Main/Services/AvailableServices/ServiceDetails";
+import UserMessages from "../pages/Dashboard/Admin/UserMessages/UserMessages";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +43,10 @@ const router = createBrowserRouter([
             {
                 path: "/contact",
                 element: <Contact></Contact>,
+            },
+            {
+                path: "/details/:id",
+                element: <ServiceDetails></ServiceDetails>
             },
             {
                 path: "/login",
@@ -76,6 +82,10 @@ const router = createBrowserRouter([
             {
                 path: "bookings",
                 element: <BookingsList></BookingsList>
+            },
+            {
+                path: "user-messages",
+                element: <UserMessages></UserMessages>
             },
 
 
