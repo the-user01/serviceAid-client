@@ -7,8 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Heading = () => {
 
-    const isAdmin = true;
-    const isCustomer = false;
+    const isAdmin = false;
+    const isCustomer = true;
     const isProvider = false;
 
     const { loader, user, logOut } = useAuth();

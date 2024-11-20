@@ -2,14 +2,20 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import useAxios from "../../../../hooks/useAxios";
 import { useState } from 'react'
-import {AiOutlineLeft } from 'react-icons/ai'
+import { AiOutlineLeft } from 'react-icons/ai'
 import HelmetHook from "../../../../hooks/HelmetHook";
+import useAuth from "../../../../hooks/useAuth";
+import Swal from "sweetalert2";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const ServiceDetails = () => {
 
     const [selectedDate, setSelectedDate] = useState(null)
+    const [contactNumber, setContactNumber] = useState('')
 
+    const { user } = useAuth();
     const axiosInstance = useAxios();
     const { id } = useParams();
 
@@ -21,10 +27,51 @@ const ServiceDetails = () => {
         },
     })
 
+    const handleSearch = (e) => {
+        setContactNumber(e.target.value);
+    };
+
+    const handleBookService = () => {
+
+        if (contactNumber === '') {
+            toast.error("Enter your contact number")
+        }
+        else if (selectedDate === null) {
+            toast.error("Booking Day is not selected!")
+        }
+        else {
+            const bookingsInfo = {
+                userName: user?.displayName,
+                userEmail: user?.email,
+                serviceName: service?.serviceName,
+                providerName: service?.providerName,
+                price: service?.price,
+                bokingDay: selectedDate,
+                contactNumber,
+                status: "Pending"
+            }
+
+            axiosInstance.post('/bookings', bookingsInfo)
+                .then(() => {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Success",
+                        text: "Your booking is successful. Service provider will contact with you soon",
+                    });
+
+                    setContactNumber('');
+                    setSelectedDate(null);
+                })
+        }
+
+
+
+    }
+
 
     return (
         <>
-        <HelmetHook title={`${service?.serviceName}`}></HelmetHook>
+            <HelmetHook title={`${service?.serviceName}`}></HelmetHook>
             <div className="container mx-auto px-4 py-8">
 
                 {/* Back Button */}
@@ -33,9 +80,9 @@ const ServiceDetails = () => {
                         className="relative mb-6 inline-flex items-center justify-center px-3.5 py-2 overflow-hidden font-medium text-primary transition duration-300 ease-out border-2 border-primary rounded-md shadow-md group">
 
                         <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 translate-x-full bg-primary group-hover:translate-x-0 ease">
-                          <AiOutlineLeft className="w-6 h-6"></AiOutlineLeft>
+                            <AiOutlineLeft className="w-6 h-6"></AiOutlineLeft>
                         </span>
-                        
+
                         <span
                             className="absolute flex items-center justify-center w-full h-full text-primary transition-all duration-300 transform group-hover:translate-x-full ease">Back to Services</span>
                         <span className="relative invisible">Back to Services</span>
@@ -93,11 +140,11 @@ const ServiceDetails = () => {
 
                     {/* Booking Section */}
                     <div>
-                        <div className="border rounded-lg shadow-lg p-4">
+                        <div className="border rounded-lg shadow-lg p-4 space-y-6 lg:space-y-12">
                             <h3 className="text-lg font-bold mb-4">Book This Service</h3>
 
                             <div className="mb-4">
-                                <h4 className="font-semibold mb-2">Select a Date</h4>
+                                <h4 className="font-semibold mb-2">Select a Day</h4>
                                 <div className="grid grid-cols-3 gap-2">
                                     {service?.availability?.days.map((day) => (
                                         <button
@@ -123,7 +170,21 @@ const ServiceDetails = () => {
                                 </div>
                             </div>
 
-                            <button className=" mt-2 px-8 py-3 relative shadow-xl w-full before:absolute 
+                            <div className="space-y-2 ">
+                                <label className="font-semibold">Contact Number</label>
+                                <input
+                                    type="text"
+                                    placeholder="Enter your contact number"
+                                    value={contactNumber}
+                                    onChange={handleSearch}
+                                    className="w-full px-4 py-3 border-2 rounded-md border-blue-600 outline-blue-600"
+                                    required
+                                />
+                            </div>
+
+                            <button
+                                onClick={handleBookService}
+                                className="border border-blue-600 mt-2 px-8 py-3 relative shadow-xl w-full before:absolute 
 before:top-0 before:left-0 before:w-0 before:h-0 before:border-l-[4px] before:border-t-[4px] before:border-transparent 
 hover:before:w-full hover:before:h-full hover:before:border-primary hover:before:transition-all hover:before:duration-700 
 after:border-r-[4px] after:border-b-[4px] after:border-transparent hover:after:border-primary 
@@ -133,6 +194,7 @@ after:h-0 hover:after:w-full hover:after:h-full hover:after:transition-all hover
                         </div>
                     </div>
                 </div>
+                <ToastContainer autoClose={1200}></ToastContainer>
             </div>
         </>
     );

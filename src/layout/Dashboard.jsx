@@ -7,8 +7,8 @@ const Dashboard = () => {
     const { logOut } = useAuth()
     const navigate = useNavigate()
 
-    const isAdmin = true;
-    const isCustomer = false;
+    const isAdmin = false;
+    const isCustomer = true;
     const isProvider = false;
 
     const activeNav = ({ isActive }) => {

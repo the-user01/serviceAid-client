@@ -9,7 +9,6 @@ const AllUsers = () => {
     const axiosInstance = useAxios()
 
     const [searchQuery, setSearchQuery] = useState('');
-    const [selectedMessage, setSelectedMessage] = useState(null);
 
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
