@@ -8,6 +8,8 @@ const AllUsers = () => {
 
     const axiosInstance = useAxios()
 
+    const [searchQuery, setSearchQuery] = useState('');
+    const [selectedMessage, setSelectedMessage] = useState(null);
 
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
@@ -43,14 +45,39 @@ const AllUsers = () => {
         });
     }
 
+    const handleSearch = (e) => {
+        setSearchQuery(e.target.value);
+    };
 
-
+    const filteredUsers = users.filter(user =>
+        user?.name?.toLowerCase()?.includes(searchQuery?.toLowerCase() || '') ||
+        user?.email?.toLowerCase()?.includes(searchQuery?.toLowerCase() || '') ||
+        user?.role?.toLowerCase()?.includes(searchQuery?.toLowerCase() || '')
+    );
 
 
     return (
         <>
+            {/* Header */}
+            <header className="flex items-center justify-between px-6 py-4 bg-white shadow">
+                <div className="flex items-center space-x-4">
+                    <input
+                        type="text"
+                        placeholder="Search messages..."
+                        className="w-64 px-4 py-2 border rounded-md"
+                        value={searchQuery}
+                        onChange={handleSearch}
+                    />
+                </div>
+            </header>
+            
             <div className="p-6 bg-gray-100 min-h-screen">
-                <h2 className="text-3xl font-bold text-gray-800 mb-6">All Users</h2>
+
+                <div className="mb-6">
+                    <h2 className="text-2xl font-semibold text-gray-900">All Users</h2>
+
+                </div>
+
                 <div className="overflow-x-auto">
                     <table className="w-full text-left table-auto bg-white shadow-md rounded-lg">
                         <thead>
@@ -62,7 +89,7 @@ const AllUsers = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {users.map((user, index) => (
+                            {filteredUsers.map((user, index) => (
                                 <tr
                                     key={user._id}
                                     className={`border-b ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
@@ -86,7 +113,7 @@ const AllUsers = () => {
 
                                             <td className="px-6 py-4 font-medium text-red-700 cursor-pointer" >
                                                 <div
-                                                onClick={()=>handleDeleteUser(user)}
+                                                    onClick={() => handleDeleteUser(user)}
                                                     className="relative w-8 h-8 bg-red-500 rounded-full text-white flex items-center justify-center 
                    overflow-hidden group"
                                                 >
