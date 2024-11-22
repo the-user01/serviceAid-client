@@ -21,6 +21,7 @@ import ServiceProviderHome from "../pages/Dashboard/ServiceProvider/ServiceProvi
 import ServiceProviderServices from "../pages/Dashboard/ServiceProvider/ServiceProviderServices/ServiceProviderServices";
 import ServiceDetails from "../pages/Main/Services/AvailableServices/ServiceDetails";
 import UserMessages from "../pages/Dashboard/Admin/UserMessages/UserMessages";
+import CustomerReportPage from "../pages/Dashboard/Customer/CustomerBookings/CustomerReportPage";
 
 const router = createBrowserRouter([
     {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register></Register>,
+            },
+            {
+                path: "/customer-report-page/:id",
+                element: <CustomerReportPage></CustomerReportPage>,
             },
         ]
     },

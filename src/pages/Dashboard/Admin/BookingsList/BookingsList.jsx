@@ -1,14 +1,19 @@
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { FaTrash } from 'react-icons/fa';
+import useAxios from "../../../../hooks/useAxios";
+import HelmetHook from "../../../../hooks/HelmetHook";
 
 const BookingsList = () => {
 
-    const [bookings, setBookings] = useState([
-        { id: 1, service: 'Home Cleaning', customer: 'Alice Brown', date: '2023-06-15', status: 'Completed' },
-        { id: 2, service: 'Plumbing Repair', customer: 'Charlie Davis', date: '2023-06-16', status: 'Pending' },
-        { id: 3, service: 'Electrical Work', customer: 'Eva Green', date: '2023-06-17', status: 'In Progress' },
-        { id: 4, service: 'Home Painting', customer: 'James D', date: '2023-06-17', status: 'Canceled' },
-    ])
+    const axiosInstance = useAxios();
+
+    const { data: bookings = [], refetch, isPending: loader } = useQuery({
+        queryKey: ['bookings'],
+        queryFn: async () => {
+            const res = await axiosInstance.get(`/bookings`)
+            return res.data
+        },
+    })
 
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedMessage, setSelectedMessage] = useState(null);
@@ -18,14 +23,17 @@ const BookingsList = () => {
     };
 
     const filteredMessages = bookings.filter(message =>
-        message?.service?.toLowerCase()?.includes(searchQuery?.toLowerCase() || '') ||
-        message?.customer?.toLowerCase()?.includes(searchQuery?.toLowerCase() || '') ||
+        message?.serviceName?.toLowerCase()?.includes(searchQuery?.toLowerCase() || '') ||
+        message?.userName?.toLowerCase()?.includes(searchQuery?.toLowerCase() || '') ||
+        message?.bokingDay?.toLowerCase()?.includes(searchQuery?.toLowerCase() || '') ||
         message?.status?.toLowerCase()?.includes(searchQuery?.toLowerCase() || '')
     );
 
 
     return (
         <>
+        <HelmetHook title="Bookings Lists"></HelmetHook>
+
             <div>
 
                 <div>
@@ -42,70 +50,102 @@ const BookingsList = () => {
                         </div>
                     </header>
 
-                    {/* Main content area */}
-                    <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
-                        <div className="container mx-auto px-6 py-8">
-                            <div className="mb-6">
-                                <h2 className="text-2xl font-semibold text-gray-900">Services</h2>
+                    {
+                        loader ?
+                            <div className="mt-2 text-center">
+                                <span className="loading loading-dots loading-lg"></span>
+                            </div> :
 
-                            </div>
-                            <div className="bg-white shadow rounded-md overflow-hidden">
-                                <table className="w-full text-left border-collapse">
-                                    <thead className="bg-gray-200">
-                                        <tr>
-                                            <th className="p-4">Service Name</th>
-                                            <th className="p-4">Customer</th>
-                                            <th className="p-4">Date</th>
-                                            <th className="p-4">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {filteredMessages.map((message) => (
-                                            <tr
-                                                key={message._id}
-                                                className="border-t cursor-pointer transition duration-300 ease-in-out hover:bg-gray-100 hover:shadow-lg"
-                                                onClick={() => setSelectedMessage(message)}
-                                            >
-                                                <td className="p-4">{message.service}</td>
-                                                <td className="p-4">{message.customer}</td>
-                                                <td className="p-4">{message.date}</td>
-                                                <td className="p-4">{message.status}</td>
+                            < main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+                                <div className="container mx-auto px-6 py-8">
+                                    <div className="mb-6">
+                                        <h2 className="text-2xl font-semibold text-gray-900">Bookings</h2>
+                                    </div>
 
-                                                {/* <td className="p-4 space-x-2">
-
-                                                    <div
-
-                                                        className="relative w-8 h-8 bg-red-500 rounded-full cursor-pointer text-white flex items-center justify-center overflow-hidden group"
+                                    <div className="bg-white shadow p-4 rounded-md overflow-x-auto">
+                                        <table className="w-full text-left border-collapse">
+                                            <thead className="bg-gray-200">
+                                                <tr>
+                                                    <th className="p-4">Service Name</th>
+                                                    <th className="p-4">Customer</th>
+                                                    <th className="p-4">Booking Day</th>
+                                                    <th className="p-4">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {filteredMessages.map((message) => (
+                                                    message.status !== "Canceled"&&
+                                                    <tr
+                                                        key={message._id}
+                                                        onClick={() => setSelectedMessage(message)}
+                                                        className="border-t cursor-pointer transition duration-300 ease-in-out hover:bg-gray-100 hover:shadow-lg"
                                                     >
-                                                        <span
-                                                            className="block text-sm font-bold transition-transform transform group-hover:scale-0 duration-300 ease-out"
-                                                        >
-                                                            <FaTrash />
-                                                        </span>
+                                                        <td className="p-4">{message.serviceName}</td>
+                                                        <td className="p-4">{message.userName}</td>
+                                                        <td className="p-4">{message.bokingDay}</td>
+                                                        <td className="px-4 py-2">
+                                                            <span
+                                                                className={`px-2 py-1 lg:py-2 block lg:text-center rounded text-white ${message.status === 'Completed' ? 'bg-green-600' :
+                                                                    message.status === 'In Progress' ? 'bg-blue-600' :
+                                                                        'bg-yellow-500'
+                                                                    }`}
+                                                            >
+                                                                {message.status}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
 
-                                                        <div className="absolute inset-0 flex flex-wrap">
-                                                            {[...Array(12)].map((_, i) => (
-                                                                <span
-                                                                    key={i}
-                                                                    className="w-2 h-2 bg-red-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-fly-out"
-                                                                    style={{
-                                                                        animationDelay: `${i * 50}ms`,
-                                                                    }}
-                                                                ></span>
-                                                            ))}
-                                                        </div>
-                                                    </div>
 
-                                                </td> */}
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </main>
+                                    {/* Canceled Bookings */}
+
+                                    <div className="bg-white shadow p-4 rounded-md overflow-x-auto mt-8">
+                                        <h2 className="text-lg lg:text-xl font-semibold text-gray-900 mb-6">Canceled Bookings</h2>
+
+                                        <table className="w-full text-left border-collapse">
+                                            <thead className="bg-gray-200">
+                                                <tr>
+                                                    <th className="p-4">Service Name</th>
+                                                    <th className="p-4">Customer</th>
+                                                    <th className="p-4">Booking Day</th>
+                                                    <th className="p-4">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {filteredMessages.map((message) => (
+                                                     message.status === "Canceled"&&
+                                                    <tr
+                                                        key={message._id}
+                                                        onClick={() => setSelectedMessage(message)}
+                                                        className="border-t cursor-pointer transition duration-300 ease-in-out hover:bg-gray-100 hover:shadow-lg"
+                                                    >
+                                                        <td className="p-4">{message.serviceName}</td>
+                                                        <td className="p-4">{message.userName}</td>
+                                                        <td className="p-4">{message.bokingDay}</td>
+                                                        <td className="px-4 py-2">
+                                                            <span
+                                                                className='px-2 py-1 lg:py-2 block lg:text-center rounded text-white bg-red-600'
+                                                            >
+                                                                {message.status}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </main>
+                    }
+
+
                 </div>
-            </div>
+            </div >
         </>
     );
 };

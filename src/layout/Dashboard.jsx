@@ -93,7 +93,7 @@ const Dashboard = () => {
                                 <>
                                     <li><NavLink to={'/dashboard/customer-home'} style={activeNav}>Customer Home</NavLink></li>
                                     <li><NavLink to={'/dashboard/customer-booking'} style={activeNav}>My Bookings</NavLink></li>
-                                    <li><NavLink to={'/dashboard/Customer-history'} style={activeNav}>Service History</NavLink></li>
+                                    <li><NavLink to={'/dashboard/customer-history'} style={activeNav}>Bookings History</NavLink></li>
                                 </>
                             }
 
