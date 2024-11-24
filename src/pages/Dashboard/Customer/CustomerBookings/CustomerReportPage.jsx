@@ -1,20 +1,21 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import HelmetHook from "../../../../hooks/HelmetHook";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import useAxios from "../../../../hooks/useAxios";
 
 const CustomerReportPage = () => {
 
-    const {id} = useParams()
+    const { id } = useParams()
 
-    console.log(id);
+    const axiosInstance = useAxios()
+    const navigate = useNavigate()
 
     const [reportData, setReportData] = useState({
         subject: "",
         description: "",
-        file: null,
     });
 
     const handleChange = (e) => {
@@ -28,28 +29,32 @@ const CustomerReportPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         if (!reportData.subject || !reportData.description) {
             toast.error("Please fill in all required fields!")
             return;
         }
 
-        // Logic to send the data to the backend (e.g., via Axios)
-        console.log("Submitted Report:", reportData);
+        axiosInstance.patch(`/bookings/report/${id}`, reportData)
+            .then(() => {
+                Swal.fire({
+                    icon: "success",
+                    title: "Report Submitted",
+                    text: "Thank you for submitting your report. We will get back to you soon!",
+                });
 
-        Swal.fire({
-            icon: "success",
-            title: "Report Submitted",
-            text: "Thank you for submitting your report. We will get back to you soon!",
-        });
+                // Reset the form
+                setReportData({ subject: "", description: ""});
+                navigate('/dashboard/customer-booking')
+            })
 
-        // Reset the form
-        setReportData({ subject: "", description: "", file: null });
+
     };
 
     return (
         <>
 
-        <HelmetHook title="Report"></HelmetHook>
+            <HelmetHook title="Report"></HelmetHook>
 
 
             <div className="max-w-4xl mx-auto my-10 p-6 bg-white shadow-xl rounded-md">

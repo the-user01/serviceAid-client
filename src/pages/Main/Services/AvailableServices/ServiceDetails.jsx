@@ -14,6 +14,7 @@ const ServiceDetails = () => {
 
     const [selectedDate, setSelectedDate] = useState(null)
     const [contactNumber, setContactNumber] = useState('')
+    const [address, setAddress] = useState('')
 
     const { user } = useAuth();
     const axiosInstance = useAxios();
@@ -30,11 +31,17 @@ const ServiceDetails = () => {
     const handleSearch = (e) => {
         setContactNumber(e.target.value);
     };
+    const handleSearch2 = (e) => {
+        setAddress(e.target.value);
+    };
 
     const handleBookService = () => {
 
         if (contactNumber === '') {
             toast.error("Enter your contact number")
+        }
+        else if (address === '') {
+            toast.error("Enter your address")
         }
         else if (selectedDate === null) {
             toast.error("Booking Day is not selected!")
@@ -48,6 +55,7 @@ const ServiceDetails = () => {
                 price: service?.price,
                 bokingDay: selectedDate,
                 contactNumber,
+                address,
                 status: "Pending"
             }
 
@@ -60,6 +68,7 @@ const ServiceDetails = () => {
                     });
 
                     setContactNumber('');
+                    setAddress('');
                     setSelectedDate(null);
                 })
         }
@@ -170,17 +179,34 @@ const ServiceDetails = () => {
                                 </div>
                             </div>
 
-                            <div className="space-y-2 ">
-                                <label className="font-semibold">Contact Number</label>
-                                <input
-                                    type="text"
-                                    placeholder="Enter your contact number"
-                                    value={contactNumber}
-                                    onChange={handleSearch}
-                                    className="w-full px-4 py-3 border-2 rounded-md border-blue-600 outline-blue-600"
-                                    required
-                                />
+                            <div className="space-y-4">
+                                <div className="space-y-2 ">
+                                    <label className="font-semibold">Contact Number</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Enter your contact number"
+                                        value={contactNumber}
+                                        onChange={handleSearch}
+                                        className="w-full px-4 py-3 border-2 rounded-md border-blue-600 outline-blue-600"
+                                        required
+                                    />
+                                </div>
+
+                                <div className="space-y-2 ">
+                                    <label className="font-semibold">Address</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Enter your address"
+                                        value={address}
+                                        onChange={handleSearch2}
+                                        className="w-full px-4 py-3 border-2 rounded-md border-blue-600 outline-blue-600"
+                                        required
+                                    />
+                                </div>
+
                             </div>
+
+
 
                             <button
                                 onClick={handleBookService}

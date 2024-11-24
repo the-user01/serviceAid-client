@@ -12,7 +12,7 @@ const CustomerHistory = () => {
     const { data: bookings = [], refetch, isPending: loader } = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
-            const res = await axiosInstance.get(`/bookings/${user?.email}`)
+            const res = await axiosInstance.get(`/bookings/email/${user?.email}`)
             return res.data
         },
     })

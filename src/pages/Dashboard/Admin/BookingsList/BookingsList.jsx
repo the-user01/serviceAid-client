@@ -18,6 +18,8 @@ const BookingsList = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedMessage, setSelectedMessage] = useState(null);
 
+    const closeModal = () => setSelectedMessage(null);
+
     const handleSearch = (e) => {
         setSearchQuery(e.target.value);
     };
@@ -32,7 +34,7 @@ const BookingsList = () => {
 
     return (
         <>
-        <HelmetHook title="Bookings Lists"></HelmetHook>
+            <HelmetHook title="Bookings Lists"></HelmetHook>
 
             <div>
 
@@ -74,10 +76,10 @@ const BookingsList = () => {
                                             </thead>
                                             <tbody>
                                                 {filteredMessages.map((message) => (
-                                                    message.status !== "Canceled"&&
+                                                    message.status !== "Canceled" &&
                                                     <tr
                                                         key={message._id}
-                                                        onClick={() => setSelectedMessage(message)}
+                                                        // onClick={() => setSelectedMessage(message)}
                                                         className="border-t cursor-pointer transition duration-300 ease-in-out hover:bg-gray-100 hover:shadow-lg"
                                                     >
                                                         <td className="p-4">{message.serviceName}</td>
@@ -98,7 +100,7 @@ const BookingsList = () => {
                                             </tbody>
                                         </table>
                                     </div>
-                                    
+
 
 
                                     {/* Canceled Bookings */}
@@ -117,7 +119,7 @@ const BookingsList = () => {
                                             </thead>
                                             <tbody>
                                                 {filteredMessages.map((message) => (
-                                                     message.status === "Canceled"&&
+                                                    message.status === "Canceled" &&
                                                     <tr
                                                         key={message._id}
                                                         onClick={() => setSelectedMessage(message)}
@@ -138,6 +140,83 @@ const BookingsList = () => {
                                             </tbody>
                                         </table>
                                     </div>
+
+
+                                    {/* Modal */}
+                                    {selectedMessage && (
+                                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                                            <div className="bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3">
+                                                {/* Modal Header */}
+                                                <div className="border-b px-6 py-4 flex justify-between items-center">
+                                                    <h3 className="text-lg font-semibold text-gray-900">
+                                                    Service Cancellation Info
+                                                    </h3>
+                                                    <button
+                                                        className="text-gray-600 hover:text-gray-800"
+                                                        onClick={closeModal}
+                                                    >
+                                                        ✕
+                                                    </button>
+                                                </div>
+
+                                                {/* Modal Content */}
+                                                <div className="px-6 py-4">
+                                                    <p className="text-sm">
+                                                        <span className="font-semibold">Service Name: </span>
+                                                        {selectedMessage.serviceName}
+                                                    </p>
+                                                    <p className="text-sm">
+                                                        <span className="font-semibold">Provider Name: </span>
+                                                        {selectedMessage.providerName}
+                                                    </p>
+                                                    <p className="text-sm mt-2">
+                                                        <span className="font-semibold">Customer: </span>
+                                                        {selectedMessage.userName}
+                                                    </p>
+                                                    <p className="text-sm mt-2">
+                                                        <span className="font-semibold">Contact: </span>
+                                                        {selectedMessage.contactNumber}
+                                                    </p>
+                                                    <p className="text-sm mt-2">
+                                                        <span className="font-semibold">Booking Day: </span>
+                                                        {selectedMessage.bokingDay}
+                                                    </p>
+                                                    <p className="text-sm mt-2">
+                                                        <span className="font-semibold">Status: </span>
+                                                        <span className="text-red-600">{selectedMessage.status}</span>
+                                                    </p>
+
+                                                    <div className="divider"></div>
+
+                                                    <p className="text-base text-red-600 font-semibold text-center">
+                                                       Report
+                                                    </p>
+
+                                                    <p className="text-sm mt-2">
+                                                        <span className="font-semibold">Subject: </span>
+                                                        {selectedMessage?.report?.subject}
+                                                    </p>
+
+                                                    <p className="text-sm mt-2">
+                                                        <span className="font-semibold">Description: </span>
+                                                        {selectedMessage?.report?.description}
+                                                    </p>
+
+                                                    <div className="divider"></div>
+                                                </div>
+
+                                                {/* Modal Footer */}
+                                                <div className="border-t px-6 py-4 text-right">
+                                                    <button
+                                                        className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                                                        onClick={closeModal}
+                                                    >
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
 
                                 </div>
                             </main>
