@@ -1,15 +1,20 @@
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
+import useAdmin from "../hooks/useAdmin";
+import useCustomer from "../hooks/useCustomer";
 
 const Dashboard = () => {
 
     const { logOut } = useAuth()
     const navigate = useNavigate()
 
-    const isAdmin = false;
-    const isCustomer = true;
+    // const isAdmin = false;
+    // const isCustomer = true;
     const isProvider = false;
+
+    const [isAdmin] = useAdmin();
+    const [isCustomer] = useCustomer();
 
     const activeNav = ({ isActive }) => {
         return {

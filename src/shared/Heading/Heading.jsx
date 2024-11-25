@@ -4,12 +4,17 @@ import useAuth from "../../hooks/useAuth";
 import image from "../../assets/user.png"
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useCustomer from "../../hooks/useCustomer";
+import useAdmin from "../../hooks/useAdmin";
 
 const Heading = () => {
 
-    const isAdmin = false;
-    const isCustomer = true;
+    // const isAdmin = false;
+    // const isCustomer = true;
     const isProvider = false;
+
+    const [isAdmin] = useAdmin();
+    const [isCustomer] = useCustomer();
 
     const { loader, user, logOut } = useAuth();
 
