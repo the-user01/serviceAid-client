@@ -22,6 +22,8 @@ import ServiceProviderServices from "../pages/Dashboard/ServiceProvider/ServiceP
 import ServiceDetails from "../pages/Main/Services/AvailableServices/ServiceDetails";
 import UserMessages from "../pages/Dashboard/Admin/UserMessages/UserMessages";
 import CustomerReportPage from "../pages/Dashboard/Customer/CustomerBookings/CustomerReportPage";
+import AddServices from "../pages/Dashboard/ServiceProvider/AddServices/AddServices";
+import ServiceProviderPendingHome from "../pages/Dashboard/ServiceProvider/ServiceProviderHome/ServiceProviderPendingHome";
 
 const router = createBrowserRouter([
     {
@@ -114,8 +116,17 @@ const router = createBrowserRouter([
             // Service provider Dashboard
 
             {
+                path: "provider-pending-home",
+                element: <ServiceProviderPendingHome></ServiceProviderPendingHome>
+            },
+
+            {
                 path: "provider-home",
                 element: <ServiceProviderHome></ServiceProviderHome>
+            },
+            {
+                path: "add-services",
+                element: <AddServices></AddServices>
             },
             {
                 path: "provider-services",

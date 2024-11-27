@@ -1,9 +1,12 @@
+import HelmetHook from "../../../../hooks/HelmetHook";
 
 const ServiceProviderServices = () => {
     return (
-        <div>
+        <>
+        <HelmetHook title="My Services"></HelmetHook>
+
             ServiceProviderServices
-        </div>
+        </>
     );
 };
 

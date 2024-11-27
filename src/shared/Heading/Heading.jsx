@@ -7,6 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import useCustomer from "../../hooks/useCustomer";
 import useAdmin from "../../hooks/useAdmin";
 import useProvider from "../../hooks/useProvider";
+import { useQuery } from "@tanstack/react-query";
+import useAxios from "../../hooks/useAxios";
 
 const Heading = () => {
 
@@ -19,6 +21,15 @@ const Heading = () => {
     const [isProvider] = useProvider();
 
     const { loader, user, logOut } = useAuth();
+    const axiosInstance = useAxios()
+
+    const { data: providerInfo } = useQuery({
+        queryKey: ['providerInfo', user?.email],
+        queryFn: async () => {
+            const res = await axiosInstance.get(`/users/serviceProvider/${user?.email}`)
+            return res.data
+        }
+    })
 
     const handleLogout = async () => {
         try {
@@ -71,7 +82,20 @@ const Heading = () => {
 
                                     {
                                         isProvider &&
-                                        <li><NavLink to={'/dashboard/provider-home'}>Dashboard</NavLink></li>
+                                        <>
+                                            {
+                                                providerInfo?.status === "Pending" ?
+                                                    <li><NavLink to={'/dashboard/provider-pending-home'}>Dashboard</NavLink></li>
+
+                                                    :
+
+                                                    <li><NavLink to={'/dashboard/provider-home'}>Dashboard</NavLink></li>
+                                            }
+
+
+
+                                        </>
+
 
                                     }
 

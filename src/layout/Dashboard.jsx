@@ -4,10 +4,13 @@ import Swal from "sweetalert2";
 import useAdmin from "../hooks/useAdmin";
 import useCustomer from "../hooks/useCustomer";
 import useProvider from "../hooks/useProvider";
+import { useQuery } from "@tanstack/react-query";
+import useAxios from "../hooks/useAxios";
 
 const Dashboard = () => {
 
-    const { logOut } = useAuth()
+    const { user, logOut } = useAuth()
+    const axiosInstance = useAxios()
     const navigate = useNavigate()
 
     // const isAdmin = false;
@@ -28,6 +31,14 @@ const Dashboard = () => {
         }
     }
 
+    const inActiveNav = () => {
+        return {
+            color: "gray",
+            pointerEvents: "none",
+            opacity: 0.5,
+        }
+    }
+
     const handleLogout = () => {
         logOut()
             .then(() => {
@@ -40,6 +51,14 @@ const Dashboard = () => {
 
             })
     }
+
+    const { data: providerInfo } = useQuery({
+        queryKey: ['providerInfo', user?.email],
+        queryFn: async () => {
+            const res = await axiosInstance.get(`/users/serviceProvider/${user?.email}`)
+            return res.data
+        }
+    })
 
 
     return (
@@ -108,9 +127,28 @@ const Dashboard = () => {
                             {
                                 isProvider &&
                                 <>
-                                    <li><NavLink to={'/dashboard/provider-home'} style={activeNav}>Service Provider Home</NavLink></li>
-                                    <li><NavLink to={'/dashboard/provider-services'} style={activeNav}>My Services</NavLink></li>
+                                    {
+                                        providerInfo.status === "Pending" ?
+                                            <>
+                                                    <li><NavLink to={'/dashboard/provider-pending-home'} style={activeNav}>Provider Home</NavLink></li>
+                                                    <li><NavLink to={'/dashboard/add-services'} style={inActiveNav}>Add Services</NavLink></li>
+                                                    <li><NavLink to={'/dashboard/provider-services'} style={inActiveNav}>My Services</NavLink></li>
+                                                </>
+
+                                            :
+
+                                            <>
+                                                <li><NavLink to={'/dashboard/provider-home'} style={activeNav}>Provider Home</NavLink></li>
+                                                <li><NavLink to={'/dashboard/add-services'} style={activeNav}>Add Services</NavLink></li>
+                                                <li><NavLink to={'/dashboard/provider-services'} style={activeNav}>My Services</NavLink></li>
+                                            </>
+                                    }
+
+
                                 </>
+
+
+
                             }
 
                             <li className="mt-8 py-2">
