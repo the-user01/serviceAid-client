@@ -3,6 +3,7 @@ import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAdmin from "../hooks/useAdmin";
 import useCustomer from "../hooks/useCustomer";
+import useProvider from "../hooks/useProvider";
 
 const Dashboard = () => {
 
@@ -11,10 +12,11 @@ const Dashboard = () => {
 
     // const isAdmin = false;
     // const isCustomer = true;
-    const isProvider = false;
+    // const isProvider = false;
 
     const [isAdmin] = useAdmin();
     const [isCustomer] = useCustomer();
+    const [isProvider] = useProvider();
 
     const activeNav = ({ isActive }) => {
         return {
