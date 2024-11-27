@@ -19,6 +19,9 @@ export default {
           from: { transform: 'rotate(0deg)' },
           to: { transform: 'rotate(360deg)' },
         },
+        colors: {
+          primary: 'rgb(0, 123, 255)',
+        },
       },
       animation: {
         'fly-out': 'flyOut 0.5s ease-out forwards',

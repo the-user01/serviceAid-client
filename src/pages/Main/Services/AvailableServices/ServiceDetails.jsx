@@ -55,6 +55,7 @@ const ServiceDetails = () => {
                 serviceName: service?.serviceName,
                 providerName: service?.providerName,
                 price: service?.price,
+                unit: service?.unit,
                 bokingDay: selectedDate,
                 contactNumber,
                 address,

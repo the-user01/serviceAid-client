@@ -142,7 +142,7 @@ const CustomerBookings = () => {
                             {/* Showing Completed and Processing bookings */}
 
                             <div className="bg-white shadow rounded p-4 overflow-x-auto mt-8">
-                                <h2 className="text-base lg:text-lg font-semibold text-gray-900 mb-6">Completed & Ongoing Bookings</h2>
+                                <h2 className="text-base lg:text-lg font-semibold text-gray-900 mb-6">Ongoing Bookings</h2>
 
                                 <div className="h-64 lg:h-56 overflow-x-auto overflow-y-scroll  w-full">
                                     <table className="w-full border border-gray-200 rounded  overflow-x-auto">
@@ -159,7 +159,7 @@ const CustomerBookings = () => {
 
                                         <tbody>
                                             {filteredBookings.map((booking) => (
-                                                booking.status !== "Pending" && booking.status !== "Canceled" &&
+                                                booking.status === "In Progress" &&
                                                 <tr key={booking._id} className="border-b border-gray-200">
                                                     <td className="px-4 py-2">{booking.serviceName}</td>
                                                     <td className="px-4 py-2">{booking.providerName}</td>
@@ -230,14 +230,27 @@ const CustomerBookings = () => {
                                                     </td>
 
                                                     <td className="px-4 py-2 space-y-4 lg:space-y-2 lg:space-x-6">
+                                                        {
+                                                            booking.report ?
 
-                                                        <Link to={`/customer-report-page/${booking._id}`}>
-                                                            <button
-                                                                className="px-8 py-1 btn btn-sm btn-outline hover:bg-red-600
-                                                        rounded-md hover:underline ml-2">
-                                                                Report
-                                                            </button>
-                                                        </Link>
+                                                                <button
+                                                                    disabled
+                                                                    className="px-8 py-1 btn btn-sm btn-outline text-white bg-gray-600
+                                                        rounded-md ml-2 ">
+                                                                    Reported
+                                                                </button>
+
+                                                                :
+
+                                                                <Link to={`/customer-report-page/${booking._id}`}>
+                                                                    <button
+                                                                        className="px-8 py-1 btn btn-sm btn-outline hover:bg-red-600
+                                                    rounded-md hover:underline ml-2">
+                                                                        Report
+                                                                    </button>
+                                                                </Link>
+                                                        }
+
 
                                                     </td>
 

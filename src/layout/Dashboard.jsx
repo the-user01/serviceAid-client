@@ -128,11 +128,12 @@ const Dashboard = () => {
                                 isProvider &&
                                 <>
                                     {
-                                        providerInfo.status === "Pending" ?
+                                        providerInfo?.status === "Pending" ?
                                             <>
                                                     <li><NavLink to={'/dashboard/provider-pending-home'} style={activeNav}>Provider Home</NavLink></li>
                                                     <li><NavLink to={'/dashboard/add-services'} style={inActiveNav}>Add Services</NavLink></li>
                                                     <li><NavLink to={'/dashboard/provider-services'} style={inActiveNav}>My Services</NavLink></li>
+                                                    <li><NavLink to={'/dashboard/booking-status'} style={inActiveNav}>Booking Status</NavLink></li>
                                                 </>
 
                                             :
@@ -141,6 +142,7 @@ const Dashboard = () => {
                                                 <li><NavLink to={'/dashboard/provider-home'} style={activeNav}>Provider Home</NavLink></li>
                                                 <li><NavLink to={'/dashboard/add-services'} style={activeNav}>Add Services</NavLink></li>
                                                 <li><NavLink to={'/dashboard/provider-services'} style={activeNav}>My Services</NavLink></li>
+                                                <li><NavLink to={'/dashboard/booking-status'} style={activeNav}>Booking Status</NavLink></li>
                                             </>
                                     }
 
