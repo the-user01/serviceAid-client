@@ -1,19 +1,16 @@
-import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import Swal from "sweetalert2";
-import HelmetHook from "../../../../hooks/HelmetHook";
+import React, { useState } from 'react';
+import HelmetHook from '../../../../hooks/HelmetHook';
+import useAxios from '../../../../hooks/useAxios';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import useAxios from "../../../../hooks/useAxios";
+import Swal from "sweetalert2";
 
-const CustomerReportPage = () => {
-
-    const { id } = useParams()
+const SendMail = () => {
 
     const axiosInstance = useAxios()
-    const navigate = useNavigate()
 
     const [reportData, setReportData] = useState({
+        receiverMail: "",
         subject: "",
         description: "",
     });
@@ -31,32 +28,42 @@ const CustomerReportPage = () => {
             return;
         }
 
-        axiosInstance.patch(`/bookings/report/${id}`, reportData)
+        axiosInstance.post(`/send-email`, reportData)
             .then(() => {
                 Swal.fire({
                     icon: "success",
-                    title: "Report Submitted",
-                    text: "Thank you for submitting your report. We will get back to you soon!",
+                    title: "Success",
+                    text: "Mail Sent Successfully!",
                 });
 
-                // Reset the form
-                setReportData({ subject: "", description: ""});
-                navigate('/dashboard/customer-booking')
-            })
-
-
+            setReportData({receiverMail: "", subject: "", description: "" });
+        })
     };
+
 
     return (
         <>
-
-            <HelmetHook title="Report"></HelmetHook>
+            <HelmetHook title="Send Mail"></HelmetHook>
 
 
             <div className="max-w-4xl mx-auto my-10 p-6 bg-white shadow-xl rounded-md">
-                <h1 className="text-2xl font-bold text-gray-800 mb-6">Submit a Report</h1>
+                <h1 className="text-2xl font-bold text-gray-800 mb-6">Send Email</h1>
                 <form onSubmit={handleSubmit}>
                     {/* Subject */}
+                    <div className="mb-4">
+                        <label htmlFor="receiverMail" className="block text-sm font-medium text-gray-700">
+                            To <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="receiverMail"
+                            name="receiverMail"
+                            value={reportData.receiverMail}
+                            onChange={handleChange}
+                            placeholder="Enter the receivers mail"
+                            className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        />
+                    </div>
                     <div className="mb-4">
                         <label htmlFor="subject" className="block text-sm font-medium text-gray-700">
                             Subject <span className="text-red-500">*</span>
@@ -88,36 +95,20 @@ const CustomerReportPage = () => {
                         ></textarea>
                     </div>
 
-                    {/* File Upload */}
-                    {/* <div className="mb-4">
-                    <label htmlFor="file" className="block text-sm font-medium text-gray-700">
-                        Upload File (Optional)
-                    </label>
-                    <input
-                        type="file"
-                        id="file"
-                        name="file"
-                        onChange={handleFileChange}
-                        className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                    />
-                </div> */}
-
                     {/* Submit Button */}
                     <div className="mt-6">
                         <button
                             type="submit"
                             className="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                         >
-                            Submit Report
+                            Send Mail
                         </button>
                     </div>
                 </form>
                 <ToastContainer autoClose={1200}></ToastContainer>
             </div>
         </>
-
-
     );
 };
 
-export default CustomerReportPage;
+export default SendMail;

@@ -25,6 +25,7 @@ import CustomerReportPage from "../pages/Dashboard/Customer/CustomerBookings/Cus
 import AddServices from "../pages/Dashboard/ServiceProvider/AddServices/AddServices";
 import ServiceProviderPendingHome from "../pages/Dashboard/ServiceProvider/ServiceProviderHome/ServiceProviderPendingHome";
 import ProviderBookingStatus from "../pages/Dashboard/ServiceProvider/ProviderBookingStatus/ProviderBookingStatus";
+import SendMail from "../pages/Dashboard/Admin/SendMail/SendMail";
 
 const router = createBrowserRouter([
     {
@@ -94,6 +95,10 @@ const router = createBrowserRouter([
             {
                 path: "user-messages",
                 element: <UserMessages></UserMessages>
+            },
+            {
+                path: "send-mails",
+                element: <SendMail></SendMail>
             },
 
 
