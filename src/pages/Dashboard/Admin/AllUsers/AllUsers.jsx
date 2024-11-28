@@ -272,6 +272,9 @@ const AllUsers = () => {
                         <p className="mt-2">
                             <strong>Shop Name:</strong> {selectedMessage?.providerName}
                         </p>
+                        <p className="mt-2">
+                            <strong>Contact:</strong> {selectedMessage?.contactNumber || "No Number Provided"}
+                        </p>
                         <p className="mt-4">
                             <strong>Location:</strong> {selectedMessage?.location}
                         </p>

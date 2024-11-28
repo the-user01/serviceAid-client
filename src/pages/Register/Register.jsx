@@ -28,6 +28,7 @@ const Register = () => {
     const [providerInfo, setProviderInfo] = useState({
         providerName: "",
         location: "",
+        contactNumber: null,
         serviceType: "",
     });
 
@@ -422,6 +423,7 @@ const Register = () => {
         setProviderInfo({
             providerName: "",
             location: "",
+            contactNumber: null,
             serviceType: "",
         })
 
@@ -659,6 +661,7 @@ const Register = () => {
                                                 placeholder="Provider Company Name"
                                             />
                                         </div>
+
                                         <div>
                                             <label htmlFor="location" className="sr-only">
                                                 Location
@@ -674,6 +677,23 @@ const Register = () => {
                                                 placeholder="Location"
                                             />
                                         </div>
+
+                                        <div>
+                                            <label htmlFor="contactNumber" className="sr-only">
+                                                Contact Number
+                                            </label>
+                                            <input
+                                                id="contactNumber"
+                                                name="contactNumber"
+                                                type="number"
+                                                required
+                                                value={providerInfo.contactNumber}
+                                                onChange={handleProviderInfoChange}
+                                                className="input input-bordered w-full"
+                                                placeholder="Contact Number"
+                                            />
+                                        </div>
+
                                         <div>
                                             <label htmlFor="serviceType" className="sr-only">
                                                 Type of Service
