@@ -1,14 +1,34 @@
-import React, { useState } from "react";
-import { FaTrash, FaEdit } from "react-icons/fa";
+import { useState } from "react";
+import useAxios from "../../../../hooks/useAxios";
+import useAuth from "../../../../hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
 
 const AddServices = () => {
 
+  const axiosInstance = useAxios();
+  const { user } = useAuth();
+
+  const { data: providerInfo } = useQuery({
+    queryKey: ['providerInfo', user?.email],
+    queryFn: async () => {
+      const res = await axiosInstance.get(`/users/serviceProvider/${user?.email}`)
+      return res.data
+    }
+  })
+
+  // Services state
+  const [services, setServices] = useState([]);
   const [newService, setNewService] = useState({
     serviceName: "",
     description: "",
     category: "",
     price: "",
-    unit: "per hour",
+    unit: "hour",
     availability: {
       days: [],
       hours: "",
@@ -33,43 +53,75 @@ const AddServices = () => {
     }));
   };
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setNewService((prev) => ({ ...prev, image: reader.result }));
-      };
-      reader.readAsDataURL(file);
+      const formData = new FormData();
+      formData.append("image", file);
+
+      try {
+        const res = await axiosInstance.post(image_hosting_api, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+
+        if (res.data.success) {
+          setNewService((prev) => ({ ...prev, image: res.data.data.display_url }));
+        } else {
+          console.error("Image upload failed", res.data.error);
+        }
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newId =
-      services.length > 0 ? Math.max(...services.map((s) => s.id)) + 1 : 1;
-    setServices([
-      ...services,
-      {
+
+    if (!newService.image) {
+      alert("Please upload an image before submitting.");
+      return;
+    }
+
+    try {
+      const newServiceData = {
         ...newService,
-        id: newId,
-        providerName: "John Doe",
-        providerEmail: "john@example.com",
-      },
-    ]);
-    setNewService({
-      serviceName: "",
-      description: "",
-      category: "",
-      price: "",
-      unit: "per hour",
-      availability: {
-        days: [],
-        hours: "",
-      },
-      image: null,
-    });
+        providerName: providerInfo?.providerName,
+        providerEmail: providerInfo?.email,
+      };
+
+      // Add new service to the state
+      setServices((prevServices) => [...prevServices, newServiceData]);
+
+      axiosInstance.post('/services', newServiceData)
+        .then(res => {
+          if (res.data.insertedId) {
+            Swal.fire({
+              icon: "success",
+              title: "Success",
+              text: "Service Added Successful",
+            });
+
+            setNewService({
+              serviceName: "",
+              description: "",
+              category: "",
+              price: "",
+              unit: "per hour",
+              availability: {
+                days: [],
+                hours: "",
+              },
+              image: null,
+            });
+          }
+        })
+
+    } catch (error) {
+      console.error("Error adding service:", error);
+    }
   };
+
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-8">
@@ -156,9 +208,9 @@ const AddServices = () => {
                 required
                 className="w-full p-2 border rounded-md"
               >
-                <option value="per hour">Per Hour</option>
-                <option value="per day">Per Day</option>
-                <option value="per service">Per Service</option>
+                <option value="hour">Per Hour</option>
+                <option value="day">Per Day</option>
+                <option value="session">Per Session</option>
               </select>
             </div>
           </div>

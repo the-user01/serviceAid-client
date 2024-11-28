@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 const AvailableServices = ({ selectedCategory }) => {
 
     const axiosInstance = useAxios();
-
     const [searchQuery, setSearchQuery] = useState('')
 
     const { data: services = [], isPending: loader } = useQuery({
