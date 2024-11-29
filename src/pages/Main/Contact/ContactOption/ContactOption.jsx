@@ -104,7 +104,7 @@ const ContactOption = () => {
                                     <FiPhone className="w-6 h-6 text-blue-600 mr-4 mt-1" />
                                     <div>
                                         <h4 className="font-semibold">Phone</h4>
-                                        <p>+1 (555) 123-4567</p>
+                                        <p>01245745545</p>
                                         <p className="text-sm text-gray-600">Mon-Fri, 9am-6pm EST</p>
                                     </div>
                                 </div>
@@ -120,8 +120,8 @@ const ContactOption = () => {
                                     <IoLocationOutline className="w-6 h-6 text-blue-600 mr-4 mt-1" />
                                     <div>
                                         <h4 className="font-semibold">Office</h4>
-                                        <p>123 Service Street, Suite 100</p>
-                                        <p>New York, NY 10001</p>
+                                        <p>Jatrabari</p>
+                                        <p>Dhaka-1236</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start">
@@ -145,7 +145,7 @@ const ContactOption = () => {
                     <h3 className="text-2xl font-semibold mb-6 text-center">Our Location</h3>
                     <div className="aspect-w-16 aspect-h-9">
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343008!2d-74.00425878459418!3d40.74076294379132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259bf5c1654f3%3A0xc80f9cfce5383d5d!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1621436689012!5m2!1sen!2sus"
+                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1364.7245586421453!2d90.4270213!3d23.7112406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b9b5af9a9e91%3A0x131af60ac5ebb6ef!2sJatrabari%20Ideal%20School%20and%20College!5e0!3m2!1sen!2sus!4v1698778568394!5m2!1sen!2sus" 
                             width="100%"
                             height="450"
                             style={{ border: 0 }}
