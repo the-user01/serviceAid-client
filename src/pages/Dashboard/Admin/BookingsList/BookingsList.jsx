@@ -64,42 +64,88 @@ const BookingsList = () => {
                                         <h2 className="text-2xl font-semibold text-gray-900">Bookings</h2>
                                     </div>
 
-                                    <div className="bg-white shadow p-4 rounded-md overflow-x-auto">
-                                        <table className="w-full text-left border-collapse">
-                                            <thead className="bg-gray-200">
-                                                <tr>
-                                                    <th className="p-4">Service Name</th>
-                                                    <th className="p-4">Customer</th>
-                                                    <th className="p-4">Booking Day</th>
-                                                    <th className="p-4">Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {filteredMessages.map((message) => (
-                                                    message.status !== "Canceled" &&
-                                                    <tr
-                                                        key={message._id}
-                                                        // onClick={() => setSelectedMessage(message)}
-                                                        className="border-t cursor-pointer transition duration-300 ease-in-out hover:bg-gray-100 hover:shadow-lg"
-                                                    >
-                                                        <td className="p-4">{message.serviceName}</td>
-                                                        <td className="p-4">{message.userName}</td>
-                                                        <td className="p-4">{message.bokingDay}</td>
-                                                        <td className="px-4 py-2">
-                                                            <span
-                                                                className={`px-2 py-1 lg:py-2 block lg:text-center rounded text-white ${message.status === 'Completed' ? 'bg-green-600' :
-                                                                    message.status === 'In Progress' ? 'bg-blue-600' :
-                                                                        'bg-yellow-500'
-                                                                    }`}
-                                                            >
-                                                                {message.status}
-                                                            </span>
-                                                        </td>
+                                    {/* Showing pending bookings */}
+
+                                    <div className="bg-white shadow rounded p-4 overflow-x-auto">
+                                        <h2 className="text-lg lg:text-xl font-semibold text-gray-900 mb-6">Pending Bookings</h2>
+
+                                        <div className="h-64 lg:h-56 overflow-x-auto overflow-y-scroll">
+                                            <table className="border border-gray-200 rounded w-full">
+                                                <thead className="bg-gray-200">
+                                                    <tr>
+                                                        <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Service</th>
+                                                        <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Provider</th>
+                                                        <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Day</th>
+
+                                                        <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Status</th>
                                                     </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
+                                                </thead>
+
+                                                <tbody>
+                                                    {filteredMessages.map((booking) => (
+                                                        booking.status === "Pending" &&
+                                                        <tr key={booking._id} className="border-b border-gray-200">
+                                                            <td className="px-4 py-2">{booking.serviceName}</td>
+                                                            <td className="px-4 py-2">{booking.providerName}</td>
+                                                            <td className="px-4 py-2">{booking.bokingDay}</td>
+
+                                                            <td className="px-4 py-2">
+                                                                <span
+                                                                    className='px-2 flex py-1 rounded text-white bg-yellow-500'
+                                                                >
+                                                                    {booking.status}
+                                                                </span>
+                                                            </td>
+
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
+
+
+
+                                    {/* Showing Completed and Processing bookings */}
+
+                                    <div className="bg-white shadow rounded p-4 overflow-x-auto mt-8">
+                                        <h2 className="text-base lg:text-lg font-semibold text-gray-900 mb-6">Ongoing & Completed Bookings</h2>
+
+                                        <div className="h-64 lg:h-56 overflow-x-auto overflow-y-scroll  w-full">
+                                            <table className="w-full border border-gray-200 rounded  overflow-x-auto">
+                                                <thead className="bg-gray-200">
+                                                    <tr>
+                                                        <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Service</th>
+                                                        <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Provider</th>
+                                                        <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Day</th>
+
+                                                        <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Status</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    {filteredMessages.map((booking) => (
+                                                        booking.status !== "Pending" &&  booking.status !== "Canceled" &&
+                                                        <tr key={booking._id} className="border-b border-gray-200">
+                                                            <td className="px-4 py-2">{booking.serviceName}</td>
+                                                            <td className="px-4 py-2">{booking.providerName}</td>
+                                                            <td className="px-4 py-2">{booking.bokingDay}</td>
+
+                                                            <td className="px-4 py-2">
+                                                                <span
+                                                                    className={`px-2 flex py-1 rounded text-white ${booking.status === 'Completed' ? 'bg-green-600' : 'bg-blue-600'
+                                                                        }`}
+                                                                >
+                                                                    {booking.status}
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
 
 
 
@@ -149,7 +195,7 @@ const BookingsList = () => {
                                                 {/* Modal Header */}
                                                 <div className="border-b px-6 py-4 flex justify-between items-center">
                                                     <h3 className="text-lg font-semibold text-gray-900">
-                                                    Service Cancellation Info
+                                                        Service Cancellation Info
                                                     </h3>
                                                     <button
                                                         className="text-gray-600 hover:text-gray-800"
@@ -189,7 +235,7 @@ const BookingsList = () => {
                                                     <div className="divider"></div>
 
                                                     <p className="text-base text-red-600 font-semibold text-center">
-                                                       Report
+                                                        Report
                                                     </p>
 
                                                     <p className="text-sm mt-2">

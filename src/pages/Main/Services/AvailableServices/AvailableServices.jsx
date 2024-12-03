@@ -42,16 +42,16 @@ const AvailableServices = ({ selectedCategory, currentPage, itemsPerPage }) => {
                 </div>
             ) : (
                 <div>
-                    <section className="py-12">
+                    <section className="py-4">
                         <div className="container mx-auto px-4">
                             {/* Search Bar */}
-                            <div className="mb-6">
+                            <div className="mb-16">
                                 <input
                                     type="text"
                                     placeholder="Search services..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+                                    className="w-full px-4 py-2 border-2 rounded-lg border-blue-300 focus:outline-none focus:ring focus:ring-blue-400"
                                 />
                             </div>
 

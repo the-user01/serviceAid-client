@@ -26,6 +26,7 @@ import AddServices from "../pages/Dashboard/ServiceProvider/AddServices/AddServi
 import ServiceProviderPendingHome from "../pages/Dashboard/ServiceProvider/ServiceProviderHome/ServiceProviderPendingHome";
 import ProviderBookingStatus from "../pages/Dashboard/ServiceProvider/ProviderBookingStatus/ProviderBookingStatus";
 import SendMail from "../pages/Dashboard/Admin/SendMail/SendMail";
+import AdminCalender from "../pages/Dashboard/Admin/AdminCalender/AdminCalender";
 
 const router = createBrowserRouter([
     {
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
             {
                 path: "bookings",
                 element: <BookingsList></BookingsList>
+            },
+            {
+                path: "admin-calender",
+                element: <AdminCalender></AdminCalender>
             },
             {
                 path: "user-messages",

@@ -109,6 +109,7 @@ const Dashboard = () => {
                                     <li><NavLink to={'/dashboard/all-users'} style={activeNav}>Users</NavLink></li>
                                     <li><NavLink to={'/dashboard/all-services'} style={activeNav}>Services</NavLink></li>
                                     <li><NavLink to={'/dashboard/bookings'} style={activeNav}>Bookings</NavLink></li>
+                                    <li><NavLink to={'/dashboard/admin-calender'} style={activeNav}>Bookings Calender</NavLink></li>
                                     <li><NavLink to={'/dashboard/user-messages'} style={activeNav}>Message Box</NavLink></li>
                                     <li><NavLink to={'/dashboard/send-mails'} style={activeNav}>Send Mails</NavLink></li>
                                 </>

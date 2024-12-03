@@ -16,6 +16,7 @@ const ServiceDetails = () => {
     const [selectedDate, setSelectedDate] = useState(null)
     const [contactNumber, setContactNumber] = useState('')
     const [address, setAddress] = useState('')
+    const [bookingDate, setBookingDate] = useState('')
 
     const { user } = useAuth();
     const axiosInstance = useAxios();
@@ -36,6 +37,9 @@ const ServiceDetails = () => {
     const handleSearch2 = (e) => {
         setAddress(e.target.value);
     };
+    const handleSearch3 = (e) => {
+        setBookingDate(e.target.value);
+    };
 
     const handleBookService = () => {
 
@@ -44,6 +48,9 @@ const ServiceDetails = () => {
         }
         else if (address === '') {
             toast.error("Enter your address")
+        }
+        else if (bookingDate === '') {
+            toast.error("Enter Booking Date")
         }
         else if (selectedDate === null) {
             toast.error("Booking Day is not selected!")
@@ -59,6 +66,7 @@ const ServiceDetails = () => {
                 bokingDay: selectedDate,
                 contactNumber,
                 address,
+                bookingDate,
                 status: "Pending"
             }
 
@@ -73,6 +81,7 @@ const ServiceDetails = () => {
                     setContactNumber('');
                     setAddress('');
                     setSelectedDate(null);
+                    setBookingDate('')
                 })
         }
 
@@ -126,35 +135,8 @@ const ServiceDetails = () => {
                                             ${service?.price}/{service?.unit}
                                         </div>
 
-                                        {/* <div className="flex items-center">
-                    <AiFillStar className="mr-1 text-yellow-500" />
-                    {service.rating} ({service.reviewCount} reviews)
-                </div> */}
-
                                     </div>
                                 </div>
-
-                                {/* Reviews Section */}
-                                {/* <div className="border rounded-lg shadow-lg p-4 mt-6">
-            <h3 className="text-lg font-bold mb-4">Customer Reviews</h3>
-            <div className="space-y-4">
-                {service.reviews.map((review) => (
-                    <div key={review.id} className="border-b pb-4">
-                        <div className="flex justify-between items-center">
-                            <span className="font-medium">{review.user}</span>
-                            <div className="flex items-center">
-                                {Array.from({ length: review.rating }).map((_, index) => (
-                                    <AiFillStar key={index} className="text-yellow-500" />
-                                ))}
-                            </div>
-                        </div>
-                        <p className="text-gray-600">{review.comment}</p>
-                        <p className="text-sm text-gray-400">{review.date}</p>
-                    </div>
-                ))}
-            </div>
-        </div> */}
-
                             </div>
 
                             {/* Booking Section */}
@@ -220,6 +202,18 @@ const ServiceDetails = () => {
                                                         required
                                                     />
                                                 </div>
+
+                                                <div className="space-y-2 ">
+                                                    <label className="font-semibold">Booking Date</label>
+                                                    <input
+                                                        type="date"
+                                                        value={bookingDate}
+                                                        onChange={handleSearch3}
+                                                        className="w-full px-4 py-3 border-2 rounded-md border-blue-600 outline-blue-600"
+                                                        required
+                                                    />
+                                                </div>
+
                                             </div>
 
                                             <button
