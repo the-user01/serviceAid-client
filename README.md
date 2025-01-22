@@ -1,8 +1,16 @@
-# React + Vite
+# ServiceAid
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- This is a Service platform that works for local area service providers.
+- Users can book services form local service providers from this platform without any hassle. 
+- This has fixed pricing rate acording to service providers nees. User can choose suitable services according to the price range and also service review.
+- If any user face any kind of issue regarding services or the service providers, Users can report the incident to the Admin directly.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Live Server link: https://serviceaid.netlify.app
+
+
+#### Admin Information
+
+- Email: tiya@shalik.com
+- pass: 123456
